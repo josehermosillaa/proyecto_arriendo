@@ -19,7 +19,6 @@ class Usuario(models.Model):
     
 class Inmueble(models.Model): 
     
-
     id_usuario = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     id_tipo_inmueble = models.ForeignKey('Tipo_inmueble', on_delete=models.CASCADE)
     id_comuna = models.ForeignKey('Comuna', on_delete=models.CASCADE)

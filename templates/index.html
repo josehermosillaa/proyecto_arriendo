@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Portal</title>
+  </head>
+  <body>
+    {% for i in inmuebles  %}
+    {{i.nombre_inmueble}}
+    {{i.id_region.region}}
+    {{i.id_comuna.comuna}}
+    {% endfor %}
+  </body>
+</html>
