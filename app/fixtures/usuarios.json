@@ -1,0 +1,12 @@
+[
+    {
+        "model": "app.usuario", 
+        "pk": 1, 
+        "fields": {"id_usuario": 2}
+    }, 
+    {
+        "model": "app.usuario", 
+        "pk": 4, 
+        "fields": {"id_usuario": 3}
+    }
+    ]

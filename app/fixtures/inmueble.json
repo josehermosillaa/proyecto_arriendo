@@ -1,0 +1,31 @@
+[
+    {
+        "model": "app.inmueble", 
+        "pk": 2, 
+        "fields": {
+            "id_usuario": 3, 
+            "id_tipo_inmueble": 2, 
+            "id_comuna": 5, 
+            "id_region": 1, 
+            "nombre_inmueble": "Departamento 1", 
+            "m2_construido": 100.0, 
+            "numero_banos": 1, 
+            "numero_hab": 2, 
+            "direccion": "pasaje el derby 4394"}
+            },
+    {
+        "model": "app.inmueble", 
+        "pk": 3, 
+        "fields": {
+            "id_usuario": 4, 
+            "id_tipo_inmueble": 1, 
+            "id_comuna": 6, 
+            "id_region": 2, 
+            "nombre_inmueble": "Departamento 1", 
+            "m2_construido": 100.0, 
+            "numero_banos": 1, 
+            "numero_hab": 2, 
+            "direccion": "AVENIDA SIEMPRE VIVA"}
+                    }            
+
+]
