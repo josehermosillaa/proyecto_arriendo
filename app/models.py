@@ -28,7 +28,7 @@ class Inmueble(models.Model):
     numero_banos = models.PositiveIntegerField(default=0)
     numero_hab = models.IntegerField(validators=[validate_min_value],default=0)
     direccion = models.CharField(max_length=200)
-    
+    descripcion = models.TextField()
     def __str__(self):
         return self.nombre_inmueble
     
