@@ -1,0 +1,38 @@
+
+<div  class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        {% load static%}
+        <a class="navbar-brand" src href="#"><img src="" alt="logo" height="50px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Bienvenido</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Acerca</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Contacto</a>
+            </li>
+            
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a type="button" class="btn btn-primary" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a type="button" class="btn btn-primary" aria-current="page" href="{% url 'login_url' %}">Iniciar Sesion</a>
+              </li>
+            {% endif %}
+        </div>
+      </div>
+    </nav>
+  </div>

@@ -20,3 +20,5 @@ def register(request):
         form = UserForm()
         context = {'form':form}
         return render(request,'registration/register.html', context)
+
+        

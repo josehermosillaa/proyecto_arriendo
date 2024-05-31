@@ -70,9 +70,11 @@ class Tipo_usuario(models.Model):
         ('Arrendador', 'Arrendador'),
         ('Arrendatario', 'Arrendatario')
     ]
+
     tipo = models.CharField(choices=CHOICES)
+    
     def __str__(self):
-        return self.tipo
+        return str(self.pk) +'-'+self.tipo
     
 class Perfil(models.Model):
     usuario = models.OneToOneField('auth.User',on_delete=models.CASCADE)
