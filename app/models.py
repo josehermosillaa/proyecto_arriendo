@@ -71,7 +71,7 @@ class Tipo_usuario(models.Model):
         ('Arrendatario', 'Arrendatario')
     ]
 
-    tipo = models.CharField(choices=CHOICES)
+    tipo = models.CharField(choices=CHOICES,max_length=30)
     
     def __str__(self):
         return str(self.pk) +'-'+self.tipo
