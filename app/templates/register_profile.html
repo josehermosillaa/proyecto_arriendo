@@ -3,13 +3,14 @@
 
 {% block contenido %}
 <h1>
-    Registrarse
+    {{title}}
 </h1>
 <form  method="POST">
     {% csrf_token %}
     {{form.as_p}}
     {{ form.errors}}
-    <button type="submit">Registrase</button>
+    <button type="submit">Crear</button>
 </form>
+
 {% endblock contenido %}
     

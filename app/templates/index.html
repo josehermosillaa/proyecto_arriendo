@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% block contenido %}
 {% if user.is_authenticated %}
-      
-        
-        
+{{ user.username}}
       {% for i in inmuebles %}
       <ul>
         <li>{{i.nombre_inmueble}}</li>
