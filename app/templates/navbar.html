@@ -10,14 +10,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            
+            {% if tipo == 'Arrendador'  %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'get_inmuebles' %}">Propiedades</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'register_inmueble' user.username %}">Registrar propiedad</a>
+              </li>
+            {% endif %}
+              
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Bienvenido</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Acerca</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Mi perfil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Contacto</a>

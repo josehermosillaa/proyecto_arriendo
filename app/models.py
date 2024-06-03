@@ -74,7 +74,7 @@ class Tipo_usuario(models.Model):
     tipo = models.CharField(choices=CHOICES)
     
     def __str__(self):
-        return str(self.pk) +'-'+self.tipo
+        return self.tipo
     
 class Perfil(models.Model):
     usuario = models.OneToOneField('auth.User',on_delete=models.CASCADE)

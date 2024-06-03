@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block contenido %}
+    {% if user.is_authenticated %}
+        {{ user.username}} {{tipo}}
+        {% if tipo == "Arrendador" %}
+            <br>
+                {% for i in inmuebles %}
+                    <hr>
+                    <ul>
+                        <li>{{i.nombre_inmueble}}</li>
+                        <li>{{i.id_region.region}}</li>
+                        <li>{{i.id_comuna.comuna}}</li>
+                    </ul>
+                    <a  class='btn btn-primary' href="#">Editar</a>
+                    <hr>
+                    <br>
+                {% endfor %}
+                <a href="{% url 'logout' %}"">Logout</a>
+        {% else %}
+        {% endif%}
+    
+    {% else %}
+    
+            <h1>Debes Iniciar sesion para acceder al contenido</h1>
+            <a href="{% url 'login_url' %}"">Login</a>
+    {% endif %}
+{% endblock contenido %}
