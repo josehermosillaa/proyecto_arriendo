@@ -11,7 +11,7 @@
                         <li>{{i.id_region.region}}</li>
                         <li>{{i.id_comuna.comuna}}</li>
                     </ul>
-                    <a  class='btn btn-primary' href="#">Editar</a>
+                    <a  class='btn btn-primary' href="{% url 'update_inmueble' i.pk%}">Editar</a>
                     <hr>
                     <br>
                 {% endfor %}

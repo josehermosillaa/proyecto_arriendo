@@ -14,16 +14,6 @@ def index(request):
     return render(request, 'index.html', context)
     
     
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect('/')
-#     else:
-#         form = UserForm()
-#         context = {'form':form}
-#         return render(request,'registration/register.html', context)
 
 def register(request):
     if request.user.is_authenticated:
@@ -174,3 +164,58 @@ def get_inmuebles(request):
             'title':'Registrar Inmueble'
         }
     return render(request, 'inmuebles.html', context)
+
+@login_required(login_url='/login/')
+def update_inmueble(request, pk):
+    usuario = request.user
+    tipo = Perfil.objects.get(usuario=usuario).tipo_usuario.tipo
+    inmueble = Inmueble.objects.get(pk=pk)
+
+    if request.method =="POST":
+        form = InmuebleForm(request.POST)
+        if form.is_valid():
+            inmueble = Inmueble.objects.filter(pk=pk).update(**form.cleaned_data)
+            #el metodo update funciona solo con querysets por lo que no funcionara con el metodo get del object
+            
+            return HttpResponseRedirect('/inmuebles/')
+
+    ###CON EL GET
+    elif inmueble.id_usuario.id == usuario.id:
+    #nos traemos el objeto Inmueble con pk = pk
+        form = InmuebleForm(instance=inmueble)
+        context = {
+                    'form':form,
+                    'title':'Editar Inmueble',
+                    'tipo':tipo
+                    }
+    else:
+        form = 'Inmueble no encontrado'
+        context = {
+                    'form':form,
+                    'title':'Usted no tiene acceso a esta propiedad',
+                    'tipo':tipo
+
+                    }
+    return render(request,'register_inmueble.html', context)
+
+
+# @login_required(login_url='/login/')
+# def update_profile(request):
+#     usuario = request.user  
+#     if request.method == "POST":
+#         form = PerfilForm(request.POST)
+#         if form.is_valid():
+#             perfil = Perfil.objects.filter(usuario=usuario).update(**form.cleaned_data)
+#             return HttpResponseRedirect('/profile/')
+    
+#     else:
+
+#         perfil = Perfil.objects.filter(usuario=usuario)
+#         if perfil.exists():
+#             perfil = perfil.first()
+#             form = PerfilForm(instance=perfil)
+#             context = {
+#                 'form':form,
+#                 'title':'Actualizar Perfil'
+#             }
+#             return render(request, 'register_profile.html', context)
