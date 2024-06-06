@@ -2,14 +2,25 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect, get_obj
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Inmueble, Perfil
+from .models import Inmueble, Perfil, Region, Comuna
 from .forms import UserForm, PerfilForm, InmuebleForm
 # Create your views here.
 @login_required(login_url='/login/')
 def index(request):
+    regiones = Region.objects.all()
+    comunas = Comuna.objects.all()
+    region_id = request.GET.get('region')
+    comuna_id = request.GET.get('comuna')
     inmuebles = Inmueble.objects.all()
+
+    if region_id:
+        inmuebles = inmuebles.filter(id_region=region_id)
+    if comuna_id:
+        inmuebles = inmuebles.filter(id_comuna=comuna_id)
     context = {
-        'inmuebles': inmuebles
+        'inmuebles': inmuebles,
+        'regiones': regiones,
+        'comunas': comunas
     }
     return render(request, 'index.html', context)
     
@@ -17,7 +28,7 @@ def index(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/home/')
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():

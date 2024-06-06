@@ -1,5 +1,5 @@
 
-<div  class="container">
+
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -19,6 +19,10 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'register_inmueble' user.username %}">Registrar propiedad</a>
               </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Arriendos</a>
+            </li>
             {% endif %}
               
             <li class="nav-item">
@@ -40,4 +44,3 @@
         </div>
       </div>
     </nav>
-  </div>

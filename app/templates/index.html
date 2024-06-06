@@ -1,15 +1,62 @@
 {% extends 'base.html' %}
 {% block contenido %}
 {% if user.is_authenticated %}
-{{ user.username}}
-      {% for i in inmuebles %}
-      <ul>
-        <li>{{i.nombre_inmueble}}</li>
-        <li>{{i.id_region.region}}</li>
-        <li>{{i.id_comuna.comuna}}</li>
-      </ul>
-        
-      {% endfor %}
+  <h1>Arriendos Disponibles</h1>
+  <div class="row mb-3">
+    <div class=" mx-3 col col-3">
+      <!-- <form method="get">
+        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+
+      </form> -->
+
+      <form method="get" action="{% url 'home'%}">
+        <select name="region">
+          <option value="">Regiones</option>
+          {% for r in regiones%}
+            <option value="{{r.id}}">{{r.region}}</option>
+          {%endfor%}
+        </select>
+        <select name="comuna">
+          <option value="">Comunas</option>
+          {% for c in comunas%}
+            <option value="{{c.id}}">{{c.comuna}}</option>
+          {%endfor%}
+        </select>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </form>
+
+    </div>
+  </div>
+      <div class="row">
+        {% for i in inmuebles %}
+
+        <div class=" col col-5 mx-2 card mb-3">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="https://img.freepik.com/vector-gratis/hermosa-casa_24877-50819.jpg" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{i.nombre_inmueble}}, {{i.id_tipo_inmueble}}</h5>
+              <p class="card-text">{{i.descripcion}}</p>
+              <p class="card-text">
+                <ul>
+                  <li>Direccion: {{i.direccion}}, {{i.id_comuna}}, {{i.id_region}}</li>
+                  <li>construccion {{i.m2_construido}} m2 </li>
+                  <li>Dorm: {{i.numero_hab}}</li> 
+                  <li>N° baños:{{i.numero_banos}}</li>
+                </ul>
+              </p>
+              <a class="btn btn-primary" href="">Contactar al propietario</a>
+                </div>
+              </div>
+            </div>
+        </div>
+          
+        {% endfor %}
+      </div>
+
+
         <a href="{% url 'logout' %}"">Logout</a>
       
     
