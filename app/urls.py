@@ -1,5 +1,10 @@
 from django.urls import path
-from .views import index, register, profile, register_profile, update_profile, register_inmueble, get_inmuebles,update_inmueble
+from .views import (
+    index, register, profile,
+    register_profile, update_profile,
+    register_inmueble, get_inmuebles,
+    update_inmueble, contact, messages
+    )
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -13,6 +18,8 @@ urlpatterns = [
     path('register_inmueble/<str:username>/', register_inmueble, name='register_inmueble'),
     path('inmuebles/', get_inmuebles, name='get_inmuebles'),
     path('inmueble/<int:pk>/', update_inmueble, name='update_inmueble'),
+    path('contact/<int:id>/', contact, name='contact'),
+    path('messages/', messages, name='mensaje'),
 
     
 

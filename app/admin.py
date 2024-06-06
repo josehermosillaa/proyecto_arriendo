@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tipo_usuario, Tipo_inmueble,Perfil, Usuario,Inmueble,Comuna,Region
+from .models import Tipo_usuario, Tipo_inmueble,Perfil, Usuario,Inmueble,Comuna,Region,Contact
 # Register your models here.
 admin.site.register(Tipo_usuario)
 admin.site.register(Tipo_inmueble)
@@ -8,3 +8,4 @@ admin.site.register(Usuario)
 admin.site.register(Inmueble)
 admin.site.register(Comuna)
 admin.site.register(Region)
+admin.site.register(Contact)

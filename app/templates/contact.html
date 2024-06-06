@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block contenido %}
+{% if user.is_authenticated %}
+  <h1>Mensajes recibidos</h1>
+  <div class="row mb-3">
+    <div class=" mx-3 col col-3">
+      <!-- <form method="get">
+        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+
+      </form> -->
+
+     
+      <div class="row">
+        {% for m in messages %}
+        <hr>
+        <ul>
+          <li>Inmueble: {{m.nombre_inmueble}}</li>
+          <li>Correo: {{m.correo}}</li>
+          <li>Nombre remitente: {{m.nombre}}</li>
+          <li>Mensaje: {{m.mensaje}}</li>
+        </ul>
+        <hr>
+          
+        {% endfor %}
+      </div>
+
+
+        <a href="{% url 'logout' %}"">Logout</a>
+      
+    
+    {% else %}
+    
+    <h1>Debes Iniciar sesion para acceder al contenido</h1>
+    <a href="{% url 'login_url' %}"">Login</a>
+    
+      
+      
+{% endif %}
+{% endblock contenido %}

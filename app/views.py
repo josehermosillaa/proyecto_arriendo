@@ -2,8 +2,8 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect, get_obj
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Inmueble, Perfil, Region, Comuna
-from .forms import UserForm, PerfilForm, InmuebleForm
+from .models import Inmueble, Perfil, Region, Comuna, Contact
+from .forms import UserForm, PerfilForm, InmuebleForm, ContactForm
 # Create your views here.
 @login_required(login_url='/login/')
 def index(request):
@@ -208,6 +208,52 @@ def update_inmueble(request, pk):
 
                     }
     return render(request,'register_inmueble.html', context)
+
+
+def contact(request, id):
+    usuario = request.user
+    tipo = Perfil.objects.get(usuario=usuario).tipo_usuario.tipo
+    inmueble = Inmueble.objects.get(pk=id)
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            correo = form.cleaned_data['correo']
+            nombre = form.cleaned_data['nombre']
+            mensaje = form.cleaned_data['mensaje']
+            nombre_inmueble = inmueble.nombre_inmueble
+            arrendador = inmueble.id_usuario
+
+            data = Contact(
+                nombre_inmueble=nombre_inmueble,
+                correo=correo,
+                arrendador=arrendador,
+                nombre=nombre,
+                mensaje=mensaje,
+            )
+            data.save()
+            return HttpResponseRedirect('/home/')
+
+    form = ContactForm()
+    context = {
+                'form':form,
+                'title':'Contacta al Propietario',
+                'tipo':tipo
+            }
+    return render(request,'register_inmueble.html', context)
+    
+
+def messages(request):
+    usuario = request.user
+    messages = Contact.objects.filter(arrendador=usuario)
+    tipo = Perfil.objects.get(usuario=usuario).tipo_usuario.tipo
+
+    context = {
+                    'messages':messages,
+                    'tipo':tipo
+                }
+    return render(request, 'contact.html', context)
+
+
 
 
 # @login_required(login_url='/login/')

@@ -19,6 +19,9 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'register_inmueble' user.username %}">Registrar propiedad</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'mensaje'%}">Mensajes</a>
+              </li>
             {% else %}
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Arriendos</a>
@@ -28,10 +31,6 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Mi perfil</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Contacto</a>
-            </li>
-            
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <a type="button" class="btn btn-primary" aria-current="page" href="{% url 'logout' %}">Cerrar Sesion</a>

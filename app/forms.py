@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Perfil, Inmueble
+from .models import Perfil, Inmueble,Contact
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -46,3 +46,8 @@ class InmuebleForm(forms.ModelForm):
             'direccion':'Direccion',
              'descripcion':'Descripcion',
             }   #registra todos los campos disponibles
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ('correo','nombre','mensaje')
