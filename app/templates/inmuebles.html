@@ -1,43 +1,52 @@
 {% extends 'base.html' %}
 {% block contenido %}
     {% if user.is_authenticated %}
-        {{ user.username}} {{tipo}}
+        {{ user.username }} {{ tipo }}
         {% if tipo == "Arrendador" %}
             <br>
-                {% for i in inmuebles %}
-                    <hr>
-                    <ul>
-                        <li>{{i.nombre_inmueble}}</li>
-                        <li>{{i.id_region.region}}</li>
-                        <li>{{i.id_comuna.comuna}}</li>
-                    </ul>
-                    <a  class='btn btn-primary' href="{% url 'update_inmueble' i.pk%}">Editar</a>
-                    <a  class='btn btn-danger' href="{% url 'modal_inmueble' i.pk %}" id="myInput" >Borrar</a>
-                    <hr>
-                    <br>
-                    <!-- href="{% url 'delete_inmueble' i.pk%} -->
-                {% endfor %}
-                <a href="{% url 'logout' %}"">Logout</a>
+            {% for i in inmuebles %}
+                <hr>
+                <ul>
+                    <li>{{ i.nombre_inmueble }}</li>
+                    <li>{{ i.id_region.region }}</li>
+                    <li>{{ i.id_comuna.comuna }}</li>
+                </ul>
+                <a class="btn btn-primary" href="{% url 'update_inmueble' i.pk %}">Editar</a>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#mi-modal-{{ i.pk }}">Borrar</button>
+                <hr>
+                <br>
+
+                <!-- Modal -->
+                <div class="modal" id="mi-modal-{{ i.pk }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            
+                            <div class="modal-header">
+                                <h5 class="modal-title">Borrar Inmueble</h5>
+                                <button class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <p>Desea eliminar el inmueble</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                                <form method="post" action="{% url 'delete_inmueble' i.pk %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <a href="{% url 'logout' %}">Logout</a>
         {% else %}
-        {% endif%}
+        {% endif %}
     
     {% else %}
-    
-            <h1>Debes Iniciar sesion para acceder al contenido</h1>
-            <a href="{% url 'login_url' %}"">Login</a>
+        <h1>Debes Iniciar sesión para acceder al contenido</h1>
+        <a href="{% url 'login_url' %}">Login</a>
     {% endif %}
-
-
 {% endblock contenido %}
-
-<!-- {% block script %}
-    <script>
-    const myModal = document.getElementById('exampleModal')
-    const myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', () => {
-        myModal.focus()
-    })
-    </script>
-{% endblock script %}
-     -->
