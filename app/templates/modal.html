@@ -4,19 +4,14 @@
         {{ user.username}} {{tipo}}
         {% if tipo == "Arrendador" %}
             <br>
-                {% for i in inmuebles %}
-                    <hr>
-                    <ul>
-                        <li>{{i.nombre_inmueble}}</li>
-                        <li>{{i.id_region.region}}</li>
-                        <li>{{i.id_comuna.comuna}}</li>
-                    </ul>
-                    <a  class='btn btn-primary' href="{% url 'update_inmueble' i.pk%}">Editar</a>
-                    <a  class='btn btn-danger' href="{% url 'modal_inmueble' i.pk %}" id="myInput" >Borrar</a>
-                    <hr>
-                    <br>
-                    <!-- href="{% url 'delete_inmueble' i.pk%} -->
-                {% endfor %}
+                <h1>Desea eliminar el inmueble</h1>
+                <h3>{{inmueble.nombre_inmueble}}</h3>       
+                <a  class='btn btn-primary' href="{% url 'get_inmuebles' %}">Cancelar</a>
+                <a  class='btn btn-danger' href="{% url 'delete_inmueble' inmueble.pk %}" id="myInput" > Eliminar</a>
+                <hr>
+                <br>
+
+
                 <a href="{% url 'logout' %}"">Logout</a>
         {% else %}
         {% endif%}

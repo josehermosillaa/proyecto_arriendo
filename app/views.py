@@ -276,3 +276,32 @@ def messages(request):
 #                 'title':'Actualizar Perfil'
 #             }
 #             return render(request, 'register_profile.html', context)
+
+def delete_inmueble(request,pk):
+    inmueble = Inmueble.objects.filter(pk=pk)
+    inmueble.delete()
+    usuario = request.user
+    tipo = Perfil.objects.get(usuario=usuario).tipo_usuario.tipo
+    # usuario = User.objects.get(username=username)
+    inmuebles = Inmueble.objects.filter(id_usuario=usuario)
+    context = {
+            'inmuebles':inmuebles,
+            'tipo': tipo,
+            'title':'Registrar Inmueble'
+        }
+    return render(request, 'inmuebles.html', context)
+
+def modal_inmueble(request, pk):
+    usuario = request.user
+    tipo = Perfil.objects.get(usuario=usuario).tipo_usuario.tipo
+    inmueble = Inmueble.objects.get(pk=pk)
+    context = {
+            'inmueble':inmueble,
+            'tipo': tipo,
+            'title':'Registrar Inmueble'
+        }
+    
+    return render(request, 'modal.html', context)
+
+def prueba(request):
+    return render(request, 'prueba.html')

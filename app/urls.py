@@ -3,7 +3,7 @@ from .views import (
     index, register, profile,
     register_profile, update_profile,
     register_inmueble, get_inmuebles,
-    update_inmueble, contact, messages
+    update_inmueble, contact, messages, delete_inmueble, modal_inmueble, prueba
     )
 from django.contrib.auth.views import LoginView, LogoutView
 
@@ -20,6 +20,10 @@ urlpatterns = [
     path('inmueble/<int:pk>/', update_inmueble, name='update_inmueble'),
     path('contact/<int:id>/', contact, name='contact'),
     path('messages/', messages, name='mensaje'),
+    path('delete/<int:pk>/', delete_inmueble, name='delete_inmueble'),
+    path('modal/<int:pk>/', modal_inmueble, name='modal_inmueble'),
+    path('prueba/', prueba, name='prueba'),
+    
 
     
 
